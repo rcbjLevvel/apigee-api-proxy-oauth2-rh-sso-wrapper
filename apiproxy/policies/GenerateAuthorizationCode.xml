@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OAuthV2 async="false" continueOnError="false" enabled="true" name="GenerateAuthorizationCode">
+    <DisplayName>GenerateAuthorizationCode</DisplayName>
+    <FaultRules/>
+    <Properties/>
+    <ClientId>client_id</ClientId>
+    <Attributes>
+        <Attribute display="true" name="username" ref="usernameFromIdP">NA</Attribute>
+        <Attribute display="true" name="subject" ref="subject">NA</Attribute>
+    </Attributes>
+    <ExternalAuthorization>true</ExternalAuthorization>
+    <ExternalAuthorizationCode>atzCode</ExternalAuthorizationCode>
+    <Operation>GenerateAuthorizationCode</Operation>
+    <RedirectUri>redirect_uri</RedirectUri>
+    <GenerateResponse enabled="false"/>
+    <ResponseType>response_type</ResponseType>
+    <ReuseRefreshToken>true</ReuseRefreshToken>
+    <Scope>scope</Scope>
+    <Tokens/>
+</OAuthV2>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OAuthV2 async="false" continueOnError="false" enabled="true" name="OAuthTokenResponseForExternalUsers">
+    <DisplayName>OAuthTokenResponseForExternalUsers</DisplayName>
+    <Attributes>
+        <Attribute name="subject" ref="subject"/>
+    </Attributes>
+    <!--    <ExternalAccessToken>access_token</ExternalAccessToken>
+    <ExternalRefreshToken>refresh_token</ExternalRefreshToken> -->
+    <ExternalAuthorization>true</ExternalAuthorization>
+    <Operation>GenerateAccessToken</Operation>
+    <GenerateResponse enabled="true">
+        <Format>FORM_PARAM</Format>
+    </GenerateResponse>
+    <ReuseRefreshToken>true</ReuseRefreshToken>
+    <StoreToken>true</StoreToken>
+    <SupportedGrantTypes>
+        <GrantType>authorization_code</GrantType>
+    </SupportedGrantTypes>
+    <Tokens/>
+</OAuthV2>

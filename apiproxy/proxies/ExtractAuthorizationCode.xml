@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="ExtractAuthorizationCode">
+    <Description/>
+    <FaultRules/>
+    <Flows>
+        <Flow name="OAuth2-Authorization-Flow">
+            <Description>ExternalThreeLegged</Description>
+            <Request/>
+            <Response>
+                <Step>
+                    <Name>Key-Value-Map-Operations-1</Name>
+                </Step>
+                <Step>
+                    <Name>AssignMessage-AuthzCodeResponse</Name>
+                </Step>
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath "/authorize") and (request.verb = "GET")</Condition>
+        </Flow>
+        <Flow name="OAuth2-Authorization-Code-Token-Flow">
+            <Description>OAuthCallbackForExternalUsers</Description>
+            <Request>
+                <Step>
+                    <Name>Key-Value-Map-Operations-1</Name>
+                </Step>
+                <Step>
+                    <Name>ExtractAuthorizationCode</Name>
+                </Step>
+                <Step>
+                    <Name>ExchangeAccessTokenForCode</Name>
+                </Step>
+                <Step>
+                    <Name>ReadAccessTokenAndIdToken</Name>
+                </Step>
+                <Step>
+                    <Name>OAuth2-Authorization-Code-Token-Flow-IdP-Token-Endpoint-Raise-Fault</Name>
+                    <Condition>calloutResponse.status.code != 200</Condition>
+                </Step>
+                <Step>
+                    <Name>GetUserInfo</Name>
+                </Step>
+                <Step>
+                    <Name>ExtractUsrInfo</Name>
+                </Step>
+                <Step>
+                    <Name>OAuth2-Authorization-Code-Token-Flow-IdP-UserInfo-Endpoint-Raise-Fault</Name>
+                    <Condition>calloutUserInfoResponse.status.code != 200</Condition>
+                </Step>
+                <Step>
+                    <Name>SetFlagForAPIGEEOAuth</Name>
+                </Step>
+                <Step>
+                    <Name>GenerateAuthorizationCode</Name>
+                </Step>
+            </Request>
+            <Response>
+                <Step>
+                    <Name>OAuthTokenResponseForExternalUsers</Name>
+                </Step>
+                <Step>
+                    <Name>JavaScript-1</Name>
+                </Step>
+                <Step>
+                    <Name>Populate-Cache-1</Name>
+                </Step>
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath "/token") and (request.verb = "POST") and (request.formparam.grant_type = "authorization_code")</Condition>
+        </Flow>
+        <Flow name="OAuth2-Client-Credentials-Token">
+            <Description/>
+            <Request>
+                <Step>
+                    <Name>Key-Value-Map-Operations-1</Name>
+                </Step>
+                <Step>
+                    <Name>ClientCredentials-ExtractVariables</Name>
+                </Step>
+                <Step>
+                    <Name>OAuth2-Client-Credentials-Token-ExchangeAccessTokenForCode</Name>
+                </Step>
+                <Step>
+                    <Name>OAuth2-Client_Credentials-Token-Extract-Variables-1</Name>
+                </Step>
+                <Step>
+                    <Name>OAuth2-ClientCredentials-Token-IdP-Token-Endpoint-Raise-Fault</Name>
+                    <Condition>calloutResponse.status.code != 200</Condition>
+                </Step>
+                <Step>
+                    <Name>Assign-Message-1</Name>
+                </Step>
+            </Request>
+            <Response>
+                <Step>
+                    <Name>OAuth2-Client-Credentials-Token-OAuthTokenResponseForExternalUsers</Name>
+                </Step>
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath "/token") and (request.verb = "POST") and (request.formparam.grant_type = "client_credentials")</Condition>
+        </Flow>
+        <Flow name="OAuth2-Refresh-Token-Flow">
+            <Description/>
+            <Request>
+                <Step>
+                    <Name>Key-Value-Map-Operations-1</Name>
+                </Step>
+                <Step>
+                    <Name>RefreshToken-ExtractVariables</Name>
+                </Step>
+                <Step>
+                    <Name>Lookup-Cache-1</Name>
+                </Step>
+                <!--                <Step>
+                    <Name>Raise-Fault-1</Name>
+                    <Condition>idpRefreshToken is null</Condition>
+                </Step> -->
+                <Step>
+                    <Name>Service-Callout-1</Name>
+                </Step>
+                <Step>
+                    <Name>OAuth2-Refresh-Token-Extract-Variables-1</Name>
+                </Step>
+                <Step>
+                    <Name>OAuth2-ClientCredentials-Token-IdP-Token-Endpoint-Raise-Fault</Name>
+                    <Condition>calloutResponse.status.code != 200</Condition>
+                </Step>
+            </Request>
+            <Response>
+                <Step>
+                    <Name>OAuth2-Refresh-Token-OAuthTokenResponseForExternalUsers</Name>
+                </Step>
+                <Step>
+                    <Name>JavaScript-1</Name>
+                </Step>
+                <Step>
+                    <Name>Populate-Cache-1</Name>
+                </Step>
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath "/token") and (request.verb = "POST") and (request.formparam.grant_type = "refresh_token")</Condition>
+        </Flow>
+    </Flows>
+    <HTTPProxyConnection>
+        <BasePath>/oauth2</BasePath>
+        <Properties/>
+        <VirtualHost>secure</VirtualHost>
+    </HTTPProxyConnection>
+    <RouteRule name="NoRoute"/>
+</ProxyEndpoint>

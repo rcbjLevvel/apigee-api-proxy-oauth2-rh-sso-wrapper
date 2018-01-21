@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<APIProxy revision="17" name="blog-rh-sso-integration">
+    <Basepaths>/oauth/identity</Basepaths>
+    <ConfigurationVersion majorVersion="4" minorVersion="0"/>
+    <CreatedAt>1515344505295</CreatedAt>
+    <CreatedBy>robert.broeckelmann@rcbjconsulting.com</CreatedBy>
+    <Description></Description>
+    <DisplayName>OAuth2 Wrapper</DisplayName>
+    <LastModifiedAt>1516573431289</LastModifiedAt>
+    <LastModifiedBy>robert.broeckelmann@rcbjconsulting.com</LastModifiedBy>
+    <Policies>
+        <Policy>Assign-Message-1</Policy>
+        <Policy>AssignMessage-AuthzCodeResponse</Policy>
+        <Policy>ClientCredentials-ExtractVariables</Policy>
+        <Policy>ExchangeAccessTokenForCode</Policy>
+        <Policy>ExtractAuthorizationCode</Policy>
+        <Policy>ExtractUsrInfo</Policy>
+        <Policy>GenerateAuthorizationCode</Policy>
+        <Policy>GetUserInfo</Policy>
+        <Policy>JavaScript-1</Policy>
+        <Policy>Key-Value-Map-Operations-1</Policy>
+        <Policy>Lookup-Cache-1</Policy>
+        <Policy>OAuth2-Authorization-Code-Token-Flow-IdP-Token-Endpoint-Raise-Fault</Policy>
+        <Policy>OAuth2-Authorization-Code-Token-Flow-IdP-UserInfo-Endpoint-Raise-Fault</Policy>
+        <Policy>OAuth2-Client-Credentials-Token-ExchangeAccessTokenForCode</Policy>
+        <Policy>OAuth2-Client-Credentials-Token-OAuthTokenResponseForExternalUsers</Policy>
+        <Policy>OAuth2-ClientCredentials-Token-IdP-Token-Endpoint-Raise-Fault</Policy>
+        <Policy>OAuth2-Client_Credentials-Token-Extract-Variables-1</Policy>
+        <Policy>OAuth2-Refresh-Token-Extract-Variables-1</Policy>
+        <Policy>OAuth2-Refresh-Token-OAuthTokenResponseForExternalUsers</Policy>
+        <Policy>OAuthTokenResponseForExternalUsers</Policy>
+        <Policy>Populate-Cache-1</Policy>
+        <Policy>ReadAccessTokenAndIdToken</Policy>
+        <Policy>RefreshToken-ExtractVariables</Policy>
+        <Policy>Service-Callout-1</Policy>
+        <Policy>SetFlagForAPIGEEOAuth</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>ExtractAuthorizationCode</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources>
+        <Resource>jsc://JavaScript-1.js</Resource>
+    </Resources>
+    <Spec></Spec>
+    <TargetServers/>
+    <TargetEndpoints>
+        <TargetEndpoint>default</TargetEndpoint>
+    </TargetEndpoints>
+    <validate>false</validate>
+</APIProxy>

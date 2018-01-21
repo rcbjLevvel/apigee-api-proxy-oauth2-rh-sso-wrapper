@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OAuthV2 async="false" continueOnError="false" enabled="true" name="OAuth2-Refresh-Token-OAuthTokenResponseForExternalUsers">
+    <DisplayName>OAuthTokenResponseForExternalClientDefinition</DisplayName>
+    <!--    <ExternalAccessToken>access_token</ExternalAccessToken>
+    <ExternalRefreshToken>refresh_token</ExternalRefreshToken> -->
+    <ExternalAuthorization>true</ExternalAuthorization>
+    <!-- <RefreshToken/> -->
+    <Operation>RefreshAccessToken</Operation>
+    <RefreshTokenExpiresIn>28800000</RefreshTokenExpiresIn>
+    <!-- 8 hours -->
+    <GenerateResponse enabled="true">
+        <Format>FORM_PARAM</Format>
+    </GenerateResponse>
+    <ReuseRefreshToken>false</ReuseRefreshToken>
+    <StoreToken>true</StoreToken>
+    <SupportedGrantTypes/>
+    <Tokens/>
+</OAuthV2>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="SetFlagForAPIGEEOAuth">
+    <DisplayName>SetFlagForAPIGEEOAuth</DisplayName>
+    <AssignVariable>
+        <Name>oauth_external_authorization_status</Name>
+        <Value>true</Value>
+    </AssignVariable>
+    <AssignVariable>
+        <Name>response_type</Name>
+        <Value>code</Value>
+    </AssignVariable>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <!-- We are setting the OAuth credentials here to better match the RFC 7523 standard -->
+    <Add>
+        <FormParams>
+            <FormParam name="grant_type">authorization_code</FormParam>
+            <!--            <FormParam name="client_id">{client_id}</FormParam>
+            <FormParam name="client_secret">{client_secret}</FormParam> -->
+        </FormParams>
+    </Add>
+    <AssignTo createNew="false" transport="http" type="request"/>
+</AssignMessage>

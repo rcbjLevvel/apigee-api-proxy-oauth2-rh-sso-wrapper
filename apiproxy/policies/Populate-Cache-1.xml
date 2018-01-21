@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PopulateCache async="false" continueOnError="false" enabled="true" name="Populate-Cache-1">
+    <DisplayName>Populate Cache-1</DisplayName>
+    <Properties/>
+    <CacheKey>
+        <Prefix/>
+        <KeyFragment ref="apigeeIssuedRefreshToken"/>
+    </CacheKey>
+    <CacheResource>ATZ_CODE_STATE_CACHE</CacheResource>
+    <Scope>Global</Scope>
+    <ExpirySettings>
+        <TimeoutInSec>28800</TimeoutInSec>
+    </ExpirySettings>
+    <Source>refresh_token</Source>
+</PopulateCache>

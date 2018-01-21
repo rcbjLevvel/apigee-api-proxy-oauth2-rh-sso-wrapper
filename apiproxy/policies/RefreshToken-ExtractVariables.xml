@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ExtractVariables async="false" continueOnError="false" enabled="true" name="RefreshToken-ExtractVariables">
+    <DisplayName>ExtractAuthorizationCode</DisplayName>
+    <Source>request</Source>
+    <FormParam name="refresh_token">
+        <Pattern ignoreCase="true">{refresh_token}</Pattern>
+    </FormParam>
+    <FormParam name="scope">
+        <Pattern ignoreCase="true">{scope}</Pattern>
+    </FormParam>
+    <FormParam name="client_id">
+        <Pattern ignoreCase="true">{client_id}</Pattern>
+    </FormParam>
+    <FormParam name="client_secret">
+        <Pattern ignoreCase="true">{client_secret}</Pattern>
+    </FormParam>
+    <FormParam name="grant_type">
+        <Pattern ignoreCase="true">{grant_type}</Pattern>
+    </FormParam>
+</ExtractVariables>

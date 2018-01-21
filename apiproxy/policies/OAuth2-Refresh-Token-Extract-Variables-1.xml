@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ExtractVariables async="false" continueOnError="true" enabled="true" name="OAuth2-Refresh-Token-Extract-Variables-1">
+    <Source>calloutResponse</Source>
+    <JSONPayload>
+        <Variable name="access_token" type="string">
+            <JSONPath>$.access_token</JSONPath>
+        </Variable>
+        <Variable name="refresh_token" type="string">
+            <JSONPath>$.refresh_token</JSONPath>
+        </Variable>
+    </JSONPayload>
+</ExtractVariables>

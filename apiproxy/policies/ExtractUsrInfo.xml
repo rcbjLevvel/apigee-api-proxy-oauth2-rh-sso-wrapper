@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ExtractVariables async="false" continueOnError="true" enabled="true" name="ExtractUsrInfo">
+    <DisplayName>ExtractUsrInfo</DisplayName>
+    <Source>calloutUserInfoResponse</Source>
+    <JSONPayload>
+        <Variable name="usernameFromIdP" type="string">
+            <JSONPath>$.preferred_username</JSONPath>
+        </Variable>
+        <Variable name="subject" type="string">
+            <JSONPath>$.sub</JSONPath>
+        </Variable>
+    </JSONPayload>
+</ExtractVariables>

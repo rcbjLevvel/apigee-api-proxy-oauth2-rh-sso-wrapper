@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<LookupCache async="false" continueOnError="false" enabled="true" name="Lookup-Cache-1">
+    <DisplayName>Lookup Cache-1</DisplayName>
+    <Properties/>
+    <CacheKey>
+        <Prefix/>
+        <KeyFragment ref="refresh_token"/>
+    </CacheKey>
+    <CacheResource>ATZ_CODE_STATE_CACHE</CacheResource>
+    <Scope>Global</Scope>
+    <AssignTo>idpRefreshToken</AssignTo>
+</LookupCache>

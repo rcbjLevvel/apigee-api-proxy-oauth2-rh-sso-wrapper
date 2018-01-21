@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ExtractVariables async="false" continueOnError="true" enabled="true" name="ReadAccessTokenAndIdToken">
+    <Source>calloutResponse</Source>
+    <JSONPayload>
+        <Variable name="access_token" type="string">
+            <JSONPath>$.access_token</JSONPath>
+        </Variable>
+        <Variable name="id_token" type="string">
+            <JSONPath>$.id_token</JSONPath>
+        </Variable>
+        <Variable name="refresh_token" type="string">
+            <JSONPath>$.refresh_token</JSONPath>
+        </Variable>
+        <Variable name="expires_in" type="long">
+            <JSONPath>$.expires_in</JSONPath>
+        </Variable>
+    </JSONPayload>
+</ExtractVariables>
