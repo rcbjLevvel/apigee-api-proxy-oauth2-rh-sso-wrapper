@@ -18,7 +18,7 @@ The quickest way to try out this project is to grab the API Proxy in [zip form](
 
 A cache must be created in Apigee Edge: ATZ_CODE_STATE_CACHE. The API Proxy stores authorization codes and refresh tokens belonging to valid sessions for the third-party IdP.
 
-A Key Value Map must also be created in  Apigee Edge: configuration. This KVM contains the following parameters:
+A Key Value Map must also be created in Apigee Edge: configuration. This KVM contains the following parameters:
 * idpUserInfoEndpoint: The OIDC UserInfo Endpoint (example: /auth/realms/demo_project_sf/protocol/openid-connect/userinfo)
 * idpTokenEndpoint: The OIDC Token Endpoint (example: /auth/realms/demo_project_sf/protocol/openid-connect/token)
 * idpAuthorizationEndpoint: The OIDC Authorization Endpoint (example: /auth/realms/demo_project_sf/protocol/openid-connect/auth)
@@ -41,13 +41,20 @@ To run this project you will need
   ```
 apigeetool deployproxy  -u admin_user_for_org -p admin_password -o apigee_org  -e env_name -n blog-rh-sso-integration -d ${REPOSITORY_HOME}/proxy
   ```
-4. Clone the OAuth + OIDC Debugger tool repository by running
+4. Clone the [OAuth + OIDC Debugger](https://github.com/GetLevvel/oauth2-oidc-debugger) tool repository by running
 ```
 git clone https://github.com/GetLevvel/oauth2-oidc-debugger.git
 ```
+4. Create a cache called ATZ_CODE_STATE_CACHE.
+4. Create a Key Value Map that contains the following values:
+* idpUserInfoEndpoint: The OIDC UserInfo Endpoint (example: /auth/realms/demo_project_sf/protocol/openid-connect/userinfo)
+* idpTokenEndpoint: The OIDC Token Endpoint (example: /auth/realms/demo_project_sf/protocol/openid-connect/token)
+* idpAuthorizationEndpoint: The OIDC Authorization Endpoint (example: /auth/realms/demo_project_sf/protocol/openid-connect/auth)
+* idpHost (example: ec2-blah.compute-1.amazonaws.com:8443)
 5. Follow the instruction's in this repo's README.md to build and start the docker image.
 6. Open a browser.
 7. Go to http://localhost:3000.
+8. 
 
 ## Authors
 * **Robert C. Broeckelmann Jr.** - *Initial work*
