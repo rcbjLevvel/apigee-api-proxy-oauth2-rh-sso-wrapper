@@ -41,15 +41,11 @@ To run this project you will need
   ```
 apigeetool deployproxy  -u admin_user_for_org -p admin_password -o apigee_org  -e env_name -n blog-rh-sso-integration -d ${REPOSITORY_HOME}/proxy
   ```
-4. Clone the [OAuth + OIDC Debugger](https://github.com/GetLevvel/oauth2-oidc-debugger) tool repository by running
-```
-git clone https://github.com/GetLevvel/oauth2-oidc-debugger.git
-```
-5. Log into the Apigee Edge Public Cloud console [here](https://enterprise.apigee.com).
-6. Go to Publish->Products.
-7. Click the "+Product" button in the upper left-hand corner.
-8. Give the new Product a name of "OAuth2Test-API-Product".
-9. Fill in the additional fields:
+4. Log into the Apigee Edge Public Cloud console [here](https://enterprise.apigee.com).
+5. Go to Publish->Products.
+6. Click the "+Product" button in the upper left-hand corner.
+7. Give the new Product a name of "OAuth2Test-API-Product".
+8. Fill in the additional fields:
   * Display Name: Provide a meaningful display name.
   * Description: Provide a meaningful description.
   * Environment: Test
@@ -59,39 +55,65 @@ git clone https://github.com/GetLevvel/oauth2-oidc-debugger.git
   * Allowed OAuth scopes: User
   * Paths: /
   * API Proxies: blog-rh-sso-integration
-10. Click Save.
-11. Go to Publisher->Developer Apps.
-12. Click the "+Developer App" button.
-13. Fill in the following parameters:
+9. Click Save.
+10. Go to Publisher->Developer Apps.
+11. Click the "+Developer App" button.
+12. Fill in the following parameters:
   * Name: blogTestApp
   * Display Name: A meaningful display name.
   * Developer Name: Yourself
   * Callback URL: http://localhost:3000/callback (so this can be used with the [OAuth2 + OIDC Debugger](https://github.com/GetLevvel/oauth2-oidc-debugger)
   * Expiration: Never
   * Products: The product created above (OAuth2Test-API-Product).
-14. Click the Save button.
-15. Click on "blogTestApp" in the list of Developer Apps.
-16. Under Credentials, click on the Consumer Key button.
-17. Save this value for later reference (this is the OAuth2 client identifier).
-18. Under Credentials, click on the Consumer Secret button.
-19. Save this value for later reference (this is the OAuth2 client secret).
-20. Go to APIs->Environment.
-21. Go to the Caches tab (should be the default).
-22. Create a cache called ATZ_CODE_STATE_CACHE.
-23. Go to the Key Value Maps tab.
-24. Create a Key Value Map that contains the following values:
+13. Click the Save button.
+14. Click on "blogTestApp" in the list of Developer Apps.
+15. Under Credentials, click on the Consumer Key button.
+16. Save this value for later reference (this is the OAuth2 client identifier).
+17. Under Credentials, click on the Consumer Secret button.
+18. Save this value for later reference (this is the OAuth2 client secret).
+19. Copy the following script to your local filesystem:
+```
+#!/bin/bash
+#Update these variables with the values obtained earlier.
+CLIENT_ID=
+CLIENT_SECRET=
+REDIRECT_URI=
+KEY=
+REALM=
+RH_SSO_HOST=
+curl -v -X POST \
+-d ‘{ “clientId”: “${CLIENT_ID}”, “secret”: “${CLIENT_SECRET}”,”redirectUris”:[“${REDIRECT_URI}"] }’ \
+-H “Content-Type:application/json” \
+-H “Accept: application/json” \
+-H “Authorization: Bearer KEY” \
+https://${RH_SSO_HOST}:8443/auth/realms/${REALM}/clients-registrations/default --insecure -D headers.out
+```
+20. Update the following values in the shell script:
+  * CLIENT_ID=the Apigee test application client_id that was just created.
+  * CLIENT_SECRET=the Apigee test application client_secret that was just created.
+  * REDIRECT_URI=the 3Scale test application redirect_uri that was just created.
+  * KEY=INITIAL_ACCESS_TOKEN just created in Red Hat SSO
+  * REALM=RH_SSO_REALM_NAME
+  * RH_SSO_HOST=resolvable Red Hat SSO URL hostname
+21. Run the shell script to create the client definition in Red Hat SSO.
+22. Configure Red Hat SSO v7.1 to work with OpenID Connect per [this post](https://medium.com/@robert.broeckelmann/openid-connect-authorization-code-flow-with-red-hat-sso-d141dde4ed3f). If you aren't using Red Hat SSO, then follow the appropriate instructions for your third-party IdP.
+23. Go to APIs->Environment.
+24. Go to the Caches tab (should be the default).
+25. Create a cache called ATZ_CODE_STATE_CACHE.
+26. Go to the Key Value Maps tab.
+27. Create a Key Value Map that contains the following values:
 * idpUserInfoEndpoint: The OIDC UserInfo Endpoint (example: /auth/realms/demo_project_sf/protocol/openid-connect/userinfo)
 * idpTokenEndpoint: The OIDC Token Endpoint (example: /auth/realms/demo_project_sf/protocol/openid-connect/token)
 * idpAuthorizationEndpoint: The OIDC Authorization Endpoint (example: /auth/realms/demo_project_sf/protocol/openid-connect/auth)
 * idpHost (example: ec2-blah.compute-1.amazonaws.com:8443)
-25. Clone the [OAuth2 + OIDC Debugger](https://github.com/GetLevvel/oauth2-oidc-debugger) repo by running:
+28. Clone the [OAuth2 + OIDC Debugger](https://github.com/GetLevvel/oauth2-oidc-debugger) repo by running:
 ```
 git clone https://github.com/GetLevvel/oauth2-oidc-debugger.git
 ```
-26. Follow the instructions in this repo's [README.md](https://github.com/GetLevvel/oauth2-oidc-debugger/blob/master/README.md) to build and start the docker image.
-27. Open a browser.
-28. Go to http://localhost:3000.
-29. Using the following values, use the OAuth2 + OIDC Debugger to obtain an access token:
+29. Follow the instructions in this repo's [README.md](https://github.com/GetLevvel/oauth2-oidc-debugger/blob/master/README.md) to build and start the docker image.
+30. Open a browser.
+31. Go to http://localhost:3000.
+32. Using the following values, use the OAuth2 + OIDC Debugger to obtain an access token:
   * Authorization Endpoint: https://org-env.apigee.net/oauth2/authorization (org = your org, env = env name)
   * Token Endpoint: https:/org-env.apigee.net/oauth2/token (org = your org, env = env name)
   * Client Identifier: Obtained above from the Consumer Key
