@@ -45,49 +45,54 @@ apigeetool deployproxy  -u admin_user_for_org -p admin_password -o apigee_org  -
 ```
 git clone https://github.com/GetLevvel/oauth2-oidc-debugger.git
 ```
-4. Log into the Apigee Edge Public Cloud console [here](https://enterprise.apigee.com).
-4. Go to Publish->Products.
-4. Click the "+Product" button in the upper left-hand corner.
-4. Give the new Product a name of "OAuth2Test-API-Product".
-4. Fill in the additional fields:
-* Display Name: Provide a meaningful display name.
-* Description: Provide a meaningful description.
-* Environment: Test
-* Key Approval Type: Automatic
-* Access: Public
-* Quota: Can be left blank
-* Allowed OAuth scopes: User
-* Paths: /
-* API Proxies: blog-rh-sso-integration
-4. Click Save.
-4. Go to Publisher->Developer Apps.
-4. Click the "+Developer App" button.
-4. Fill in the following parameters:
-* Name: blogTestApp
-* Display Name: A meaningful display name.
-* Developer Name: Yourself
-* Callback URL: http://localhost:3000/callback (so this can be used with the [OAuth2 + OIDC Debugger](https://github.com/GetLevvel/oauth2-oidc-debugger)
-* Expiration: Never
-* Products: The product created above (OAuth2Test-API-Product).
-4. Click the Save button.
-4. Click on "blogTestApp" in the list of Developer Apps.
-4. Under Credentials, click on the Consumer Key button.
-4. Save this value for later reference (this is the OAuth2 client identifier).
-4. Under Credentials, click on the Consumer Secret button.
-4. Save this value for later reference (this is the OAuth2 client secret).
-4. Go to APIs->Environment.
-4. Go to the Caches tab (should be the default).
-4. Create a cache called ATZ_CODE_STATE_CACHE.
-4. Go to the Key Value Maps tab.
-4. Create a Key Value Map that contains the following values:
+5. Log into the Apigee Edge Public Cloud console [here](https://enterprise.apigee.com).
+6. Go to Publish->Products.
+7. Click the "+Product" button in the upper left-hand corner.
+8. Give the new Product a name of "OAuth2Test-API-Product".
+9. Fill in the additional fields:
+  * Display Name: Provide a meaningful display name.
+  * Description: Provide a meaningful description.
+  * Environment: Test
+  * Key Approval Type: Automatic
+  * Access: Public
+  * Quota: Can be left blank
+  * Allowed OAuth scopes: User
+  * Paths: /
+  * API Proxies: blog-rh-sso-integration
+10. Click Save.
+11. Go to Publisher->Developer Apps.
+12. Click the "+Developer App" button.
+13. Fill in the following parameters:
+  * Name: blogTestApp
+  * Display Name: A meaningful display name.
+  * Developer Name: Yourself
+  * Callback URL: http://localhost:3000/callback (so this can be used with the [OAuth2 + OIDC Debugger](https://github.com/GetLevvel/oauth2-oidc-debugger)
+  * Expiration: Never
+  * Products: The product created above (OAuth2Test-API-Product).
+14. Click the Save button.
+15. Click on "blogTestApp" in the list of Developer Apps.
+16. Under Credentials, click on the Consumer Key button.
+17. Save this value for later reference (this is the OAuth2 client identifier).
+18. Under Credentials, click on the Consumer Secret button.
+19. Save this value for later reference (this is the OAuth2 client secret).
+20. Go to APIs->Environment.
+21. Go to the Caches tab (should be the default).
+22. Create a cache called ATZ_CODE_STATE_CACHE.
+23. Go to the Key Value Maps tab.
+24. Create a Key Value Map that contains the following values:
 * idpUserInfoEndpoint: The OIDC UserInfo Endpoint (example: /auth/realms/demo_project_sf/protocol/openid-connect/userinfo)
 * idpTokenEndpoint: The OIDC Token Endpoint (example: /auth/realms/demo_project_sf/protocol/openid-connect/token)
 * idpAuthorizationEndpoint: The OIDC Authorization Endpoint (example: /auth/realms/demo_project_sf/protocol/openid-connect/auth)
 * idpHost (example: ec2-blah.compute-1.amazonaws.com:8443)
-5. Follow the instruction's in this repo's README.md to build and start the docker image.
-6. Open a browser.
-7. Go to http://localhost:3000.
-8. 
+25. Follow the instruction's in this repo's README.md to build and start the docker image.
+26. Open a browser.
+27. Go to http://localhost:3000.
+28. Using the following values, use the OAuth2 + OIDC Debugger to obtain an access token:
+  * Authorization Endpoint: https://org-env.apigee.net/ 
+  *
+  *
+  *
+  *
 
 ## Authors
 * **Robert C. Broeckelmann Jr.** - *Initial work*
