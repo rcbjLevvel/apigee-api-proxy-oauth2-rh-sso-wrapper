@@ -84,7 +84,10 @@ git clone https://github.com/GetLevvel/oauth2-oidc-debugger.git
 * idpTokenEndpoint: The OIDC Token Endpoint (example: /auth/realms/demo_project_sf/protocol/openid-connect/token)
 * idpAuthorizationEndpoint: The OIDC Authorization Endpoint (example: /auth/realms/demo_project_sf/protocol/openid-connect/auth)
 * idpHost (example: ec2-blah.compute-1.amazonaws.com:8443)
-25. Clone the [OAuth2 + OIDC Debugger](https://github.com/GetLevvel/oauth2-oidc-debugger) repo.
+25. Clone the [OAuth2 + OIDC Debugger](https://github.com/GetLevvel/oauth2-oidc-debugger) repo by running:
+```
+git clone https://github.com/GetLevvel/oauth2-oidc-debugger.git
+```
 26. Follow the instructions in this repo's [README.md](https://github.com/GetLevvel/oauth2-oidc-debugger/blob/master/README.md) to build and start the docker image.
 27. Open a browser.
 28. Go to http://localhost:3000.
