@@ -84,15 +84,22 @@ git clone https://github.com/GetLevvel/oauth2-oidc-debugger.git
 * idpTokenEndpoint: The OIDC Token Endpoint (example: /auth/realms/demo_project_sf/protocol/openid-connect/token)
 * idpAuthorizationEndpoint: The OIDC Authorization Endpoint (example: /auth/realms/demo_project_sf/protocol/openid-connect/auth)
 * idpHost (example: ec2-blah.compute-1.amazonaws.com:8443)
-25. Follow the instruction's in this repo's README.md to build and start the docker image.
-26. Open a browser.
-27. Go to http://localhost:3000.
-28. Using the following values, use the OAuth2 + OIDC Debugger to obtain an access token:
-  * Authorization Endpoint: https://org-env.apigee.net/ 
-  *
-  *
-  *
-  *
+25. Clone the [OAuth2 + OIDC Debugger](https://github.com/GetLevvel/oauth2-oidc-debugger) repo.
+26. Follow the instructions in this repo's [README.md](https://github.com/GetLevvel/oauth2-oidc-debugger/blob/master/README.md) to build and start the docker image.
+27. Open a browser.
+28. Go to http://localhost:3000.
+29. Using the following values, use the OAuth2 + OIDC Debugger to obtain an access token:
+  * Authorization Endpoint: https://org-env.apigee.net/oauth2/authorization (org = your org, env = env name)
+  * Token Endpoint: https:/org-env.apigee.net/oauth2/token (org = your org, env = env name)
+  * Client Identifier: Obtained above from the Consumer Key
+  * Client Secret: Obtained above from the Consumer Secret
+  * Callback: http://localhost:3000/callback
+  * Scope: User
+  * Username: configured in the third-party IdP (User1, if following the Red Hat SSO v7.1 post referenced above).
+  * Password: configured in the third-party IdP (secret, if following the Red Hat SSO v7.1 post referenced above).
+  * Validate Token Endpoint SSL: Yes
+  * Display OIDC Artifacts: No
+  * Use Refresh Tokens?: Yes (if needed) 
 
 ## Authors
 * **Robert C. Broeckelmann Jr.** - *Initial work*
