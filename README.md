@@ -1,4 +1,4 @@
-# An Apigee API Proxy that wraps Red Hat SSO with the out-of-the-box OAuth2 implementation
+# An Apigee API Proxy that wraps Red Hat SSO (or any OIDC-compliant Identity Provider) with the out-of-the-box OAuth2 implementation
 This API Proxy demonstrates wrapping a third-party OAuth2/OIDC compliant Identity Provider (IdP) with Apigee's out-of-the-box OAuth2 implementation. The OAuth2 Authorization Code Grant and Client Credentials Grant are implemented in this API Proxy. The OpenID Connect Authorization Code flow will also work as is. The other OAuth2 Grants and OIDC flows are not implemented, but could easily be added using the exisitng examples as a guide. The Refresh Token Grant is also supported in this example.
 
 This example uses Red Hat SSO v7.1 as the third-party IdP. In theory, any OAuth2-compliant, third-party IdP could be substituted in the example.  A common client definition must be shared between Apigee and the third-party IdP.  Of course, only the OAuth2 Grants and OIDC Flows mentioned above are supported in this example.
